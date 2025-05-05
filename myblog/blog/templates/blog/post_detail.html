@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .post { margin-bottom: 40px; }
+        .comment { border-top: 1px solid #ccc; padding: 10px 0; }
+        .btn {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .btn:hover { background-color: #0056b3; }
+        a { text-decoration: none; color: #007BFF; }
+    </style>
+</head>
+<body>
+    <div class="post">
+        <h1>{{ post.title }}</h1>
+        <p><em>{{ post.created_at }}</em></p>
+        <div>
+            {{ post.content|linebreaks }}
+        </div>
+    </div>
+
+    <h2>Комментарии</h2>
+    {% for comment in post.comments.all %}
+        <div class="comment">
+            <p><strong>{{ comment.author }}</strong> — {{ comment.created_date }}</p>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+    {% empty %}
+        <p>Комментариев пока нет.</p>
+    {% endfor %}
+
+    <div style="margin-top: 30px;">
+        <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn">Добавить комментарий</a>
+        <a href="{% url 'post_list' %}" class="btn">Назад к списку постов</a>
+    </div>
+</body>
+</html>

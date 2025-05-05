@@ -24,4 +24,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('posts/', views.post_list, name='post_list'),
     path('category/<slug:category_slug>/', views.posts_by_category, name='posts_by_category'),
+    path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
+    path('posts/<int:pk>/', views.post_detail, name='post_detail'),
 ]

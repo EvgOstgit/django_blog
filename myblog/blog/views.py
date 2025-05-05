@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Category
+from .forms import CommentForm
 
 # представление для отображения списка постов
 def post_list(request):
@@ -31,3 +32,20 @@ def posts_by_category(request, category_slug):
     posts = Post.objects.filter(categories=category).order_by('-created_at')
 
     return render(request, 'blog/posts_by_category.html', {'category': category, 'posts': posts})
+
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form, 'post': post})
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
