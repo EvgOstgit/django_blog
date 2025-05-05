@@ -1,0 +1,5 @@
+[
+    {"model": "blog.category", "fields": {"name": "Frontend Development"}},
+    {"model": "blog.category", "fields": {"name": "Backend Development"}},
+    {"model": "blog.category", "fields": {"name": "DevOps и Инфраструктура"}}
+]

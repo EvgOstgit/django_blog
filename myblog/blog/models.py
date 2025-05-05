@@ -8,8 +8,10 @@ class Category(models.Model):
     slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
+        print(f"Saving category: {self.name}")
         if not self.slug:
             self.slug = slugify(self.name)
+            print(f"Generated slug: {self.slug}")
         super().save(*args, **kwargs)
 
     def __str__(self):

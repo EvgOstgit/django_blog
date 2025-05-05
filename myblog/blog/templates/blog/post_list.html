@@ -8,7 +8,7 @@
     <h2>Категории:</h2>
     <ul>
         {% for category in categories %}
-            <li><a href="{% url 'posts_by_category'}">{{ category.name }}</a></li>
+            <li><a href="{% url 'posts_by_category' category.slug %}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
     <h2>Посты</h2>
