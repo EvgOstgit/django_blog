@@ -1,0 +1,27 @@
+<!-- templates/blog/posts_by_category.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Категория: {{ category.name }}</title>
+</head>
+<body>
+    <h1>Категория: {{ category.name }}</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content|truncatewords:30 }}</p>
+                <small>Дата создания: {{ post.created_at }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+    <ul>
+        <li>
+            <a href="{% url 'post_list' %}">Вернуться к списку постов</a>
+        </li>
+        <li>
+            <a href="/">На главную</a>
+        </li>
+    </ul>
+</body>
+</html>
