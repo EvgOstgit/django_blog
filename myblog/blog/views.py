@@ -45,7 +45,13 @@ def add_comment_to_post(request, pk):
     else:
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form, 'post': post})
-
-def post_detail(request, pk):
+    
+def post_detail(request, pk, category_slug=None):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    category = None
+    if category_slug:
+        try:
+            category = Category.objects.get(slug=category_slug)
+        except Category.DoesNotExist:
+            category = None
+    return render(request, 'blog/post_detail.html', {'post': post, 'category': category})

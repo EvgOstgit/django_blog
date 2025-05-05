@@ -39,8 +39,11 @@
     {% endfor %}
 
     <div style="margin-top: 30px;">
-        <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn">Добавить комментарий</a>
-        <a href="{% url 'post_list' %}" class="btn">Назад к списку постов</a>
+        {% if category %}
+            <a href="{% url 'posts_by_category' category.slug %}" class="btn">← Назад в категорию "{{ category.name }}"</a>
+        {% endif %}
+        <a href="{% url 'post_list' %}" class="btn">← Ко всем постам</a>
+        <a href="/" class="btn">← На главную</a>
     </div>
 </body>
 </html>

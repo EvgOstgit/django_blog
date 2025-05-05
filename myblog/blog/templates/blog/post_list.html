@@ -27,7 +27,7 @@
     <ul>
         {% for post in posts %}
             <li>
-                <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <a href="{% url 'post_detail_no_category' post.pk %}">{{ post.title }}</a>
                 <p>{{ post.content|truncatewords:30 }}</p>
                 <small>Дата создания: {{ post.created_at }}</small>
             </li>
